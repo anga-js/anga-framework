@@ -1,0 +1,13 @@
+{
+  "name": "@anga/model",
+  "version": "1.0.0",
+  "description": "Model Base for Anga",
+  "main": "./src/model.js",
+  "author": "Kevin Isom<kevin.isom@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@anga/validation": "1.0.0",
+    "@hapi/hoek": "^7.1.0",
+    "mongodb": "^3.2.7"
+  }
+}
