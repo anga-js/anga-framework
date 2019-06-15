@@ -1,0 +1,21 @@
+{
+  "name": "anga-framework",
+  "version": "1.0.0",
+  "description": "Anga Framework",
+  "main": "index.js",
+  "repository": "git@github.com:Kevnz/anga.git",
+  "author": "Kevin Isom<kevin.isom@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "docker": "docker-compose -f ./docker/dev/docker-compose.yml up"
+  },
+  "workspaces": [
+    "packages/*",
+    "working"
+  ],
+  "devDependencies": {
+    "@kev_nz/eslint-config": "^3.3.0",
+    "eslint": "^5.16.0"
+  }
+}
