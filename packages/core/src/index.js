@@ -41,10 +41,21 @@ const setup = async ({ INSTALLED_APPS, CONNECTION, NAME, DB }, config) => {
   const globbedModels = LOCAL_APPS.map(app =>
     Path.join(process.cwd(), `/${app}/models/*.js`)
   )
-  const globbedPages = LOCAL_APPS.map(app =>
-    Path.join(process.cwd(), `/${app}/pages/*.js`)
+  const globbedAppPaths = LOCAL_APPS.map(app =>
+    Path.join(process.cwd(), `/${app}`)
   )
-
+  const angaLayouts = ANGA_APPS.reduce((t, a) => {
+    try {
+      console.log(a)
+      const templates = require(`${a}/templates`)
+      t.push(templates.path)
+      return t
+    } catch (e) {
+      return t
+    }
+  }, [])
+  const angaHelpers = angaLayouts.map(p => Path.join(p, 'helpers'))
+  const angaPartials = angaLayouts.map(p => Path.join(p, 'partials'))
   const models = await globby(globbedModels)
 
   try {
@@ -61,7 +72,17 @@ const setup = async ({ INSTALLED_APPS, CONNECTION, NAME, DB }, config) => {
       },
     })
 
-    await app.register(Manifest({ routes: allRoutes, models: models }))
+    await app.register(
+      Manifest({ routes: allRoutes, models: models, apps: globbedAppPaths })
+    )
+    await app.register({
+      plugin: require('hapi-router'),
+      options: {
+        routes: allRoutes,
+        ignore: [],
+      },
+    })
+
     // install next
     app.views({
       engines: {
@@ -69,14 +90,15 @@ const setup = async ({ INSTALLED_APPS, CONNECTION, NAME, DB }, config) => {
         ejs: require('ejs'),
       },
       relativeTo: __dirname,
-      path: templatePaths,
+      path: templatePaths.concat(angaLayouts),
       layout: true, // need to verify layout exists
-      layoutPath: templatePaths, // maybe somewhere else?
-      // helpersPath: [Users.helpers, Admin.helpers],
-      // partialsPath: [Users.partials, Admin.partials],
+      layoutPath: templatePaths.concat(angaLayouts), // maybe somewhere else?
+      helpersPath: angaHelpers,
+      partialsPath: angaPartials,
     })
     await app.start()
     console.info('🚀 Server running')
+    console.log('layoutPath', templatePaths.concat(angaLayouts))
     return app
   } catch (err) {
     console.error(err)
