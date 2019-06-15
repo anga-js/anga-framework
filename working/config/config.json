@@ -1,0 +1,10 @@
+{
+  "port": 4568,
+  "app": {
+    "secret": "the app secret so change it"
+  },
+  "mailtrap": {
+    "user": "1dc481db3c0056",
+    "password": "7e19b71b727cbe"
+  }
+}
