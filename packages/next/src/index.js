@@ -1,4 +1,7 @@
+const fs = require('fs').promises
+const path = require('path')
 const next = require('next')
+const { mapper } = require('@kev_nz/async-tools')
 const pkg = require('../package.json')
 
 const {
@@ -37,38 +40,41 @@ module.exports = {
   name: pkg.name,
   version: pkg.version,
   register: async function(server, options) {
-    const app = next({
-      dev: process.env.NODE_ENV !== 'production',
-      dir: options.dir,
-      conf: {
-        webpack: (
-          config,
-          { buildId, dev, isServer, defaultLoaders, webpack }
-        ) => {
-          // Note: we provide webpack above so you should not `require` it
-          // Perform customizations to webpack config
-          // Important: return the modified config
+    const apps = options.apps
+    await mapper(apps, async dir => {
+      const app = next({
+        dev: process.env.NODE_ENV !== 'production',
+        dir,
+        conf: {
+          webpack: (
+            config,
+            { buildId, dev, isServer, defaultLoaders, webpack }
+          ) => {
+            // Note: we provide webpack above so you should not `require` it
+            // Perform customizations to webpack config
+            // Important: return the modified config
 
-          // Example using webpack option
-          // config.plugins.push(new webpack.IgnorePlugin(/\/__tests__\//))
-          if (!isServer) {
-            config.resolve = {
-              alias: {
-                '@anga/model': '@anga/client-model',
-                '@anga/validation': '@anga/client-validation',
-              },
+            // Example using webpack option
+            // config.plugins.push(new webpack.IgnorePlugin(/\/__tests__\//))
+            if (!isServer) {
+              config.resolve = {
+                alias: {
+                  '@anga/model': '@anga/client-model',
+                  '@anga/validation': '@anga/client-validation',
+                },
+              }
             }
-          }
-          return config
+            return config
+          },
+          webpackDevMiddleware: config => {
+            // Perform customizations to webpack dev middleware config
+            // Important: return the modified config
+            return config
+          },
         },
-        webpackDevMiddleware: config => {
-          // Perform customizations to webpack dev middleware config
-          // Important: return the modified config
-          return config
-        },
-      },
+      })
+      await app.prepare()
+      server.route(loadRoutes(app, options.routes))
     })
-    await app.prepare()
-    server.route(loadRoutes(app, options.routes))
   },
 }
