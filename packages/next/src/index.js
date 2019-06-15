@@ -29,7 +29,11 @@ const loadRoutes = (app, routeList) => {
     routes.push({
       method: 'GET',
       path: route,
-      handler: pathWrapper(app, route),
+      config: {
+        auth: { mode: 'optional' },
+
+        handler: pathWrapper(app, route),
+      },
     })
   }
 
