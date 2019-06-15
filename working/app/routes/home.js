@@ -5,6 +5,7 @@ module.exports = [
     method: 'GET',
     path: '/',
     config: {
+      auth: { mode: 'optional' },
       handler: async (request, h) => {
         const todo = await ToDo.create('First ToDo', 'Descrtiption of ToDo')
         console.log('ToDo', todo)
