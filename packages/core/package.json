@@ -1,0 +1,24 @@
+{
+  "name": "@anga/core",
+  "version": "1.0.0",
+  "main": "./src/index.js",
+  "author": "Kevin Isom<kevin.isom@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@anga/flash": "1.0.0",
+    "@anga/models-loader": "1.0.0",
+    "@hapi/good": "^8.2.0",
+    "@hapi/good-console": "^8.1.0",
+    "@hapi/hapi": "^18.3.1",
+    "@hapi/inert": "^5.2.0",
+    "@hapi/vision": "^5.5.2",
+    "@kev_nz/async-tools": "^1.2.1",
+    "blipp": "^4.0.0",
+    "debug": "^4.1.1",
+    "globby": "^9.2.0",
+    "hapi-router": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
