@@ -23,19 +23,6 @@ const register = async (server, options) => {
   server.decorate('request', 'logger', function(...args) {
     console.info(...args)
   })
-
-  server.views({
-    engines: {
-      html: require('handlebars'),
-      ejs: require('ejs'),
-    },
-    relativeTo: __dirname,
-    path: path.resolve(__dirname, '../', './templates'),
-    layout: true, // need to verify layout exists
-    layoutPath: path.resolve(__dirname, '../', './templates'), // maybe somewhere else?
-    helpersPath: path.resolve(__dirname, '../', './templates', './helpers'),
-    partialsPath: path.resolve(__dirname, '../', './templates', './partials'),
-  })
 }
 
 const { name, version } = pkg
