@@ -1,0 +1,13 @@
+{
+  "name": "@anga/dev",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "bin": {
+    "anga-dev": "./index.js"
+  },
+  "dependencies": {
+    "mongodb-memory-server": "^5.1.3",
+    "nodemon": "^1.19.1"
+  }
+}
