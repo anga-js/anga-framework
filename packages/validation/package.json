@@ -1,0 +1,11 @@
+{
+  "name": "@anga/validation",
+  "version": "1.0.0",
+  "description": "Validation for Anga",
+  "main": "./src/index.js",
+  "author": "Kevin Isom<kevin.isom@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/joi": "^15.0.3"
+  }
+}
