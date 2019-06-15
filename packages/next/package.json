@@ -4,6 +4,7 @@
   "main": "./src/index.js",
   "license": "MIT",
   "dependencies": {
+    "@kev_nz/async-tools": "^1.2.1",
     "next": "^8.1.0"
   }
 }
