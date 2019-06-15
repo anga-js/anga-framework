@@ -1,4 +1,9 @@
-module.exports = ({ routes = [], ignoreRoutes = [], models = [] }) => [
+module.exports = ({
+  routes = [],
+  ignoreRoutes = [],
+  models = [],
+  apps = [],
+}) => [
   {
     plugin: require('blipp'),
   },
@@ -25,13 +30,7 @@ module.exports = ({ routes = [], ignoreRoutes = [], models = [] }) => [
       },
     },
   },
-  {
-    plugin: require('hapi-router'),
-    options: {
-      routes,
-      ignore: ignoreRoutes,
-    },
-  },
+
   {
     plugin: require('@anga/flash'),
   },
@@ -51,5 +50,12 @@ module.exports = ({ routes = [], ignoreRoutes = [], models = [] }) => [
   {
     plugin: require('@anga/auth/plugin'),
     options: {},
+  },
+  {
+    plugin: require('@anga/next'),
+    options: {
+      apps: apps,
+      routes: ['/about'],
+    },
   },
 ]
