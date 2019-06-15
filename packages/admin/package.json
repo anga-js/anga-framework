@@ -1,0 +1,13 @@
+{
+  "name": "@anga/admin",
+  "version": "1.0.0",
+  "description": "Admin System for Anga",
+  "main": "./src/index.js",
+  "author": "Kevin Isom<kevin.isom@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@anga/validation": "1.0.0",
+    "@kev_nz/async-tools": "^1.2.1",
+    "to-case": "^2.0.0"
+  }
+}
