@@ -11,7 +11,7 @@ const register = function(server, options) {
       // For working via HTTP in localhost
       isSecure: false,
     },
-    redirectTo: '/login',
+    redirectTo: '/auth/login',
 
     validateFunc: async (request, session) => {
       const buff = Buffer.from(session.id, 'base64')
@@ -71,6 +71,6 @@ const register = function(server, options) {
 
 module.exports = {
   name: 'anga-user-auth',
-  dependencies: ['@hapi/cookie', 'anga-models-loader'],
+  dependencies: ['@hapi/cookie', '@anga/models-loader'],
   register,
 }
