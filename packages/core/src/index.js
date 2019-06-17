@@ -2,6 +2,7 @@ const Path = require('path')
 const debug = require('debug')('anga:core')
 const globby = require('globby')
 const Hapi = require('@hapi/hapi')
+const H2o2 = require('@hapi/h2o2')
 const { mapper } = require('@kev_nz/async-tools')
 const Manifest = require('./manifest')
 
@@ -83,7 +84,6 @@ const setup = async ({ INSTALLED_APPS, CONNECTION, NAME, DB }, config) => {
       },
     })
 
-    // install next
     app.views({
       engines: {
         html: require('handlebars'),
@@ -96,6 +96,27 @@ const setup = async ({ INSTALLED_APPS, CONNECTION, NAME, DB }, config) => {
       helpersPath: angaHelpers,
       partialsPath: angaPartials,
     })
+    await app.register(H2o2)
+    const authServer = require('@anga/auth/server')
+    await authServer(4579)
+    app.route({
+      method: '*',
+      path: '/auth/{param*}',
+      handler: {
+        proxy: {
+          mapUri: request => {
+            console.info(
+              'THE AUTH redir',
+              `http://localhost:4579/${request.path}`
+            )
+            return {
+              uri: `http://localhost:4579/${request.path}`,
+            }
+          },
+        },
+      },
+    })
+    //
     await app.start()
     console.info('🚀 Server running')
     console.log('layoutPath', templatePaths.concat(angaLayouts))
