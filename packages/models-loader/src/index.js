@@ -68,7 +68,7 @@ const register = async function(server, options) {
 }
 
 module.exports = {
-  name: 'anga-models-loader',
+  name: '@anga/models-loader',
   pkg: require('../package.json'),
   register,
 }
