@@ -90,7 +90,8 @@ module.exports = [
       const users = await User.pagedFind(query, page, limit, options)
       request.logger(users)
       return h.view('admin/users-list.html', {
-        message: 'Learning stuff',
+        layout: 'admin-layout',
+        message: 'Anga stuff',
         title: 'Anga - Users',
         users: users.data,
       })
@@ -518,6 +519,7 @@ module.exports = [
       }
 
       return h.view('admin/user-details.html', {
+        layout: 'admin-layout',
         message: 'Learning stuff',
         title: 'Anga - User',
         user: user,
@@ -551,6 +553,7 @@ module.exports = [
       }
 
       return h.view('admin/user-edit.html', {
+        layout: 'admin-layout',
         message: 'Learning stuff',
         title: 'Anga - User',
         user: user,
