@@ -12,14 +12,14 @@ const register = async (server, options) => {
   await server.register(require('hapi-boom-decorators'))
 
   await server.register(require('../strategy'))
-
+  /*
   paths.forEach(routesPath => {
     const routes = require(routesPath)
     routes.forEach(route => {
       server.route(route)
     })
   })
-
+*/
   server.decorate('request', 'logger', function(...args) {
     console.info(...args)
   })
