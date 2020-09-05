@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@hapi/hoek": "^7.1.0",
-    "handlebars": "^4.1.2",
+    "handlebars": "^4.5.3",
     "nodemailer": "^6.2.1",
     "nodemailer-markdown": "^1.0.3"
   }
