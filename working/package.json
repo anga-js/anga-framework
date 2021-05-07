@@ -17,7 +17,7 @@
     "@anga/next": "1.0.0",
     "@anga/validation": "1.0.0",
     "ejs": "^2.6.1",
-    "handlebars": "^4.1.2",
+    "handlebars": "^4.7.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "xtconf": "^4.1.0"
