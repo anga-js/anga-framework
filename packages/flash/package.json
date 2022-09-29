@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@hapi/hoek": "^7.1.0",
+    "@hapi/hoek": "^9.0.4",
     "@hapi/yar": "^9.2.0"
   }
 }
