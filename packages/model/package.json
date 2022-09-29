@@ -7,7 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "@anga/validation": "1.0.0",
-    "@hapi/hoek": "^7.1.0",
+    "@hapi/hoek": "^9.0.4",
     "mongodb": "^3.2.7"
   }
 }
